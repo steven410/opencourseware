@@ -1,3 +1,4 @@
+//Creates a grid using a 2D array
 let arr = [
   [14, 16, 5,  1,  4,  3,  20,  1],
   [19, 17, 11, 8,  10, 18, 20, 1],
@@ -7,10 +8,12 @@ let arr = [
   [14, 15, 4,  5,  17, 5,  20,  2]
 ]
 
+//Return the index of the middle number of an array
 getMiddleColIndex = function(currentArray) {
   return (currentArray[0].length / 2) - 1;
 }
 
+//Given a 2D array, return an array made of the values in the middle column
 getMiddleCol = function(currentArray) {
   let index = getMiddleColIndex(currentArray);
   let middleCol = [];
@@ -20,6 +23,7 @@ getMiddleCol = function(currentArray) {
   return middleCol;
 }
 
+//Given a 2D array, return the largest value in the middle col of the array
 maxInCol = function(currentArray) {
   let col = getMiddleCol(currentArray)
   return Math.max(...col) //This has the potential to fail if the array is too large
@@ -56,6 +60,7 @@ buildRightArray = function(currentArray, j) {
 determineSearch = function (array) {
   let currentArray = array;
   let newArray = [];
+  //Determine a starting point for searching by finding the index and value of the largest number in the middle col
   let start = [getIndexOfMax(currentArray), getMiddleColIndex(currentArray)];
   let i = start[0], j = start[1]
   console.log('start')
@@ -77,13 +82,14 @@ determineSearch = function (array) {
 
 console.log(determineSearch(arr));
 
-//Find middle column
+//Basic flow:
+//Find middle column of the matrix
 //Find maximum in this column at (i, j) [i = row, j = col]
 //Compare (i, j-1), (i, j), (i, j +1)
 // Determine which half to search in:
   //Pick left columns if (i, j-1) > (i, j) else right cols if (i, j+1) > (i, j)
   //If neither of these is the case, the peak has been found
 //Contiue splitting and searching either left or right columns until there is 1 column remaining
-//Find maxiumum in final single column
+//Find maxiumum in final single column - this a peak
 
 
