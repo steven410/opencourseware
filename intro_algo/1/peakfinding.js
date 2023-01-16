@@ -1,16 +1,17 @@
   //Creates a grid using a 2D array
   let arr = [
-    [14, 16, 5,  1,  4,  3,  13,  1],
-    [19, 17, 11, 8,  10, 18, 2, 1],
-    [2,  5,  4,  1,  14, 17, 7,  1],
-    [4,  9,  3,  13, 16, 15, 5, 1],
-    [5,  2,  7,  10, 2,  16, 20,  1],
-    [14, 15, 4,  5,  17, 5,  8,  2]
+    [14, 16, 5,  1,  4,  3,  13,  1, 2],
+    [19, 17, 11, 8,  10, 18, 2, 1, 8],
+    [2,  5,  4,  1,  14, 17, 7,  1, 5],
+    [4,  9,  3,  13, 16, 15, 5, 1, 12],
+    [5,  2,  7,  10, 2,  16, 20,  1, 4],
+    [14, 15, 4,  5,  7, 5,  8,  2, 14]
   ]
 
-  //Return the index of the middle number of an array
+  //Return the index of the middle number of an array rounded down
   getMiddleColIndex = function(currentArray) {
-    return (currentArray[0].length / 2) - 1;
+    let index = Math.floor(currentArray[0].length / 2)
+    return (index);
   }
 
   //Given a 2D array, return an array made of the values in the middle column
@@ -59,20 +60,19 @@
     let newArray = [];
     //Determine a starting point for searching by finding the index and value of the largest number in the middle col
     let start = [maxInCol(currentArray), getMiddleColIndex(currentArray)];
-    let i = start[0], j = start[1];
-    console.log({start: start})
-    if (currentArray[i][j-1] > currentArray[i][j]) {
+    let i = start[0], j = start[1]; //i = row, j = col
+    if (currentArray[i][j-1] !== undefined && currentArray[i][j-1] > currentArray[i][j]) {
       newArray = buildLeftArray(currentArray, j);
       determineSearch(newArray);
-    } else if (currentArray[i][j+1] > currentArray[i][j]) {
+    } else if (currentArray[i][j+1] !== undefined && currentArray[i][j+1] > currentArray[i][j]) {
       newArray = buildRightArray(currentArray, j);
       return determineSearch(newArray);
     } else {
-      return currentArray
+      return "Peak found at col " + i + " row " + j + " with value " + currentArray[i][j]
     }
   }
 
-  console.log(determineSearch(arr));
+  console.log(determineSearch(arr))
 
   //Basic flow:
   //Find middle column of the matrix
